@@ -12,7 +12,8 @@ The tool is based on other projects, [the first inspiration](https://gist.github
 
 ## Installation
 
-`wget `
+`curl -o /usr/local/bin/gitapper https://git.io/JTqou && chmod 755 /usr/local/bin/gitapper`
+`alias git=gitapper`
 
 ### Parameters
 
