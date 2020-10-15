@@ -6,8 +6,9 @@ set -e
 set -- $*
 PARAMETERS=$@
 FIRSTPARAMETER=$PARAMETERS
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
-GITAPPER_HOOKS=./hooks
+GITAPPER_HOOKS="$DIR/hooks"
 GIT=$(which -a git)
 
 function exec_hook() {

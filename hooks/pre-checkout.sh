@@ -20,5 +20,3 @@ if [[ $repo == *"https\:\/\/github\.com\/"* ]]; then
     $1 checkout $to_branch
     exit 1
 fi
-
-exit 0

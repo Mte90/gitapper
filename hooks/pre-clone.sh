@@ -23,5 +23,3 @@ if [[ $3 == "--fork" ]]; then
         exit 1
     fi
 fi
-
-exit 0

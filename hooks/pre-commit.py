@@ -15,7 +15,6 @@ def main():
         print("Example: feat(parser): add ability to parse arrays.")
         sys.exit(1)
     os.system(sys.argv[1] + ' commit -m "' + commit + '"')
-    sys.exit(1)
 
 if __name__ == "__main__":
     main()
