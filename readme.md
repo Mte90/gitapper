@@ -1,9 +1,13 @@
 # Gitapper
 
 Git is a difficult program to master because can do a lot of things and often everyone needs to adapt to their daily needs, with custom alias and also scripts.  
-The idea behind the project is to create a wrapper to the `git` command that will let you to use custom scripts as example when `git checkout` is used.
+The idea behind the project is to create a wrapper to the `git` command that will let you to extend it with custom scripts as example when `git checkout` is used.
 
 The tool is based on other projects, [the first inspiration](https://gist.github.com/mmueller/7286919) and [GrumPHP](https://github.com/phpro/grumphp) or [hub](https://hub.github.com/).
+
+### Why si different from alias?
+
+An alias is another command to remember, is an external command and is not extending another one.
 
 ## Requirements
 
@@ -12,8 +16,10 @@ The tool is based on other projects, [the first inspiration](https://gist.github
 
 ## Installation
 
-`curl -o /usr/local/bin/gitapper https://git.io/JTqou && chmod 755 /usr/local/bin/gitapper`
-`alias git=gitapper`
+```
+curl -o /usr/local/bin/gitapper https://git.io/JTqou && chmod 755 /usr/local/bin/gitapper
+alias git=gitapper
+```
 
 ### Parameters
 
