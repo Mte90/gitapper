@@ -8,6 +8,7 @@ def main():
     commit = sys.argv[2]
     commit = commit[7:]
     if commit[0:2] == '-m':
+        commit = commit[3:]
         m = re.match(pattern, commit)
         if m is None:
             print("Conventional commit validation failed")
@@ -15,6 +16,6 @@ def main():
             print("Example: feat(parser): add ability to parse arrays.")
             sys.exit(1)
         os.system(sys.argv[1] + ' commit -m "' + commit + '"')
-        sys.exit(0)
+        sys.exit(1)
 if __name__ == "__main__":
     main()
