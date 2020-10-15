@@ -20,3 +20,26 @@ if [[ $repo == *"https\:\/\/github\.com\/"* ]]; then
     $1 checkout $to_branch
     exit 1
 fi
+
+# FZF picker to checkout on branch
+
+# Requirements
+#  - fzf
+set -- $*
+
+repo=$3
+if [[ $repo == "" ]]; then
+    result=$(git branch --color=always | grep -v '/HEAD\s' | sort |
+    fzf --height 50% --border --ansi --tac --preview-window right:70% \
+      --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
+    sed 's/^..//' | cut -d' ' -f1)
+
+    if [[ $result != "" ]]; then
+        if [[ $result == remotes/* ]]; then
+            $1 checkout --track $(echo $result | sed 's#remotes/##')
+        else
+            $1 checkout "$result"
+        fi
+    fi
+    exit 1
+fi
