@@ -3,9 +3,7 @@ set -e
 # Debug mode
 #set -x
 
-set -- $*
-PARAMETERS=$@
-FIRSTPARAMETER=$PARAMETERS
+PARAMETERS=$*
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
 GITAPPER_HOOKS="$DIR/hooks"
@@ -34,13 +32,29 @@ if [ "$GIT" = "" ]; then
 fi
 
 # General: Do not run hooks for --help or nw
-if [[ "${@: -1}" == "--help" || "${@: -1}" == "--nw" ]]; then
-    if [[ "${@: -1}" == "--nw" ]]; then
-        PARAMETERS=${PARAMETERS::-5}
-    fi
-    "$GIT" "$@"
+if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* ]]; then
+    ARGS=''
+    ARG=''
+    # Remove --nw parameter and pass to git
+    for i in "$@"
+    do
+        if [[ $i =~ "[[:space:]]" || $i != *"--nw"* ]]
+        then
+            i2=\"$i\"
+            ARG=$i
+            if [[ $ARG == *" "* ]]
+            then
+                ARG=\"$i\"
+            fi
+            ARGS="$ARGS $ARG"
+            i=$i2
+        fi
+    done
+    PARAMETERS=$ARGS
+    
+    eval $GIT$PARAMETERS
 else
-    exec_hook "pre" $FIRSTPARAMETER
-    "$GIT" "$@"
-    exec_hook "post" $FIRSTPARAMETER
+    exec_hook "pre" $PARAMETERS
+    eval $GIT $@
+    exec_hook "post" $PARAMETERS
 fi 
