@@ -32,7 +32,7 @@ if [ "$GIT" = "" ]; then
 fi
 
 # General: Do not run hooks for --help or nw
-if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* ]]; then
+if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMETERS}" == *"gitapper"* ]]; then
     ARGS=''
     ARG=''
     # Remove --nw parameter and pass to git
@@ -55,6 +55,6 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* ]]; then
     eval $GIT$PARAMETERS
 else
     exec_hook "pre" $PARAMETERS
-    eval $GIT $@
+    eval $GIT "$PARAMETERS"
     exec_hook "post" $PARAMETERS
 fi 
