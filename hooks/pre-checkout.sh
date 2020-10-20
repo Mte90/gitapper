@@ -5,7 +5,7 @@
 set -- $*
 
 repo=$3
-if [[ $repo == *"https\:\/\/github\.com\/"* ]]; then
+if [[ $repo == *"https://github.com/"* ]]; then
     repo_full="${repo#https\:\/\/github\.com\/}"
     repo="${repo_full%\/pull\/[[:digit:]]*}"
     id="${repo_full/$repo/}"
