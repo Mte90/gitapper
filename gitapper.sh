@@ -7,7 +7,7 @@ PARAMETERS=$*
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
 GITAPPER_HOOKS="$DIR/hooks"
-GIT=$(which -a git)
+GIT=$(which -a git | head -1)
 
 function exec_hook() {
     for EXT in "sh" "py"
