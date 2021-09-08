@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Debug mode
-#set -x
+set -x
 
 PARAMETERS=$*
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -54,7 +54,8 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMET
     
     eval $GIT$PARAMETERS
 else
+    GIT_PARAMETERS=${PARAMETERS/" --fork"/''}
     exec_hook "pre" $PARAMETERS
-    eval $GIT "$PARAMETERS"
-    exec_hook "post" $PARAMETERS
+    eval $GIT "$GIT_PARAMETERS"
+    exec_hook "post" $GIT_PARAMETERS
 fi 
