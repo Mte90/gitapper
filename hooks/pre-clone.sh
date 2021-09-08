@@ -17,15 +17,13 @@ if [[ $3 == "--fork" ]]; then
         repo=${BASH_REMATCH[5]}
 
         echo "$url download in progress"
-        /usr/bin/git clone "git@github.com:$user/$repo.git" &> /dev/null
+        $GIT clone "git@github.com:$user/$repo.git" &> /dev/null
         cd $repo
         remote=$(curl -s "https://api.github.com/repos/$user/$repo" | jq -r '.parent.clone_url' | tail -c +20)
-        echo "https://api.github.com/repos/$user/$repo"
         if [ "$remote" != "" ]; then
             echo "$remote download in progress"
-            /usr/bin/git remote add upstream "git@github.com:$remote" &> /dev/null
-            /usr/bin/git fetch --all &> /dev/null
-        fi 
-        exit 1
+            $GIT remote add upstream "git@github.com:$remote" &> /dev/null
+            $GIT fetch --all &> /dev/null
+        fi
     fi
 fi

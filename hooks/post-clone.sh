@@ -7,4 +7,5 @@ cwd=$(pwd)
 
 if [[ -d "$cwd/$folder" ]]; then
     cd "$cwd/$folder"
+    $SHELL
 fi

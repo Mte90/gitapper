@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Debug mode
-set -x
+# set -x
 
 PARAMETERS=$*
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -14,9 +14,9 @@ function exec_hook() {
     do        
         if [[ -f "$GITAPPER_HOOKS/$1-$2.$EXT" ]]; then
             if [[ $EXT == "sh" ]]; then
-                . "$GITAPPER_HOOKS/$1-$2.$EXT" "$GIT" "$PARAMETERS"
+                . "$GITAPPER_HOOKS/$1-$2.$EXT" "$GIT" "$2 $3"
             else
-                "$GITAPPER_HOOKS/$1-$2.$EXT" "$GIT" "$PARAMETERS"            
+                "$GITAPPER_HOOKS/$1-$2.$EXT" "$GIT" "$2 $3"
             fi
         fi
     done
