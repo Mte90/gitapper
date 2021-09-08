@@ -3,7 +3,17 @@ set -e
 # Debug mode
 # set -x
 
-PARAMETERS=$*
+PARAMETERS=''
+for arg in "$@"
+do
+  #if an argument contains a white space, enclose it in double quotes and append to the list
+  #otherwise simply append the argument to the list
+  if echo $arg | grep -q " "; then
+   PARAMETERS="$PARAMETERS \"$arg\""
+  else
+   PARAMETERS="$PARAMETERS $arg"
+  fi
+done
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
 GITAPPER_HOOKS="$DIR/hooks"
@@ -55,7 +65,7 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMET
     eval $GIT$PARAMETERS
 else
     GIT_PARAMETERS=${PARAMETERS/" --fork"/''}
-    exec_hook "pre" $PARAMETERS
-    eval $GIT "$GIT_PARAMETERS"
-    exec_hook "post" $GIT_PARAMETERS
+    exec_hook "pre" "$PARAMETERS"
+    eval "$GIT $GIT_PARAMETERS"
+    exec_hook "post" "$GIT_PARAMETERS"
 fi 
