@@ -5,17 +5,25 @@ This tool create a wrapper to the `git` command that will let you to extend it w
 
 The tool is based on other projects, [the first inspiration for bash wrapper](https://gist.github.com/mmueller/7286919) and [GrumPHP for their tasks system](https://github.com/phpro/grumphp) or [hub](https://hub.github.com/) that extend `git` with a lot of stuff.
 
+Integrate natively [Forgit](https://github.com/wfxr/forgit) for various commands in case there are not files or branch defined.
+
 ## Requirements
 
 * git
 * bash
 * wget
+* [fzf](https://github.com/junegunn/fzf)
 
-## Installation
+### Installation
 
 ```
-curl -o /usr/local/bin/gitapper https://git.io/JTqou && chmod 755 /usr/local/bin/gitapper
-alias git=gitapper
+git clone https://github.com/Mte90/gitapper
+cd gitapper
+# Download the bash dependencies
+./build.sh
+
+# on your .bashrc
+alias git=/your/path/where/you/downloaded/gitapper
 ```
 
 ### Gitapper parameters
@@ -34,14 +42,26 @@ Also let you to create custom parameters on git commands.
 ### Hooks script avalaible
 
 * Pre-Clone
-  * If clone command has `--fork` parameter automatically will download the original and your fork with a origin upstream configured
+  * If clone command has `--fork` parameter automatically will download from GitHub the original and your fork with a origin upstream configured
 * Post-Clone
   * Auto change directory inside the repo folder after the clone
+* Pre-Add
+  * If no file passed will use the Forgit add with FZF
 * Pre-Checkout
   * Like [hub](https://hub.github.com/), when the branch is a GitHub pull request URL it automatically create a new branch with that content
-  * Branch picker when no branch is defined using [FZF](https://github.com/junegunn/fzf)
+  * Branch picker when no branch is passed will use Forgit with FZF
+* Pre-Clean
+  * If no file passed will use the Forgit clean with FZF
 * Pre-commit
   * Validate the commit if `-m` parameter is defined following [ConventionalCommits](https://www.conventionalcommits.org/en/v1.0.0)
+* Pre-Diff
+  * If no file passed will use the Forgit diff with FZF
+* Pre-Log
+  * If a file is passed will use the Forgit log with FZF
+* Pre-Rebase
+  * If is used with interactive parameter will use the Forgit rebase with FZF
+* Pre-Reset
+  * If no file is passed will use the Forgit reset with FZF
 
 ## Autocomplete support
 
