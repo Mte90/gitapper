@@ -9,6 +9,7 @@ The tool is based on other projects, [the first inspiration for bash wrapper](ht
 
 * git
 * bash
+* wget
 
 ## Installation
 
