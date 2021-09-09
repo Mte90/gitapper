@@ -26,7 +26,7 @@ source $DIR/lib/forgit.sh
 function exec_hook() {
     command=($2)
     for EXT in "sh" "py"
-    do        
+    do
         if [[ -f "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" ]]; then
             if [[ $EXT == "sh" ]]; then
                 . "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT" "$2 $3"

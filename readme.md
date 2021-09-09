@@ -48,7 +48,7 @@ In this repository you can find various hooks with different requirements and us
   * Branch picker when no branch is passed will use Forgit with FZF
 * Pre-Clean
   * If no file passed will use the Forgit clean with FZF
-* Pre-commit
+* Pre-Commit
   * Validate the commit if `-m` parameter is defined following [ConventionalCommits](https://www.conventionalcommits.org/en/v1.0.0)
 * Pre-Diff
   * If no file passed will use the Forgit diff with FZF
