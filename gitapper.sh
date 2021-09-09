@@ -21,7 +21,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 GITAPPER_HOOKS="$DIR/hooks"
 GIT=$(which -a git | head -1)
 
-source ./lib/forgit.sh
+source $DIR/lib/forgit.sh
 
 function exec_hook() {
     command=($2)

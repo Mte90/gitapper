@@ -4,7 +4,7 @@
 #  - fzf
 set -- $*
 
-if [[ $3 == "-i" || $4 == "" ]]; then
+if [[ $3 == "-i" && $4 == "" ]]; then
     forgit::rebase
     exit 1
 fi

@@ -5,11 +5,10 @@
 #  - awk
 set -- $*
 
-url=$4
+url=$3
 url=${url%/}
-if [[ $3 == "--fork" ]]; then
-    re="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)$"
-    if [[ $url =~ $re ]]; then
+re="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)$"
+if [[ $url =~ $re ]]; then
         protocol=${BASH_REMATCH[1]}
         separator=${BASH_REMATCH[2]}
         hostname=${BASH_REMATCH[3]}
@@ -25,5 +24,4 @@ if [[ $3 == "--fork" ]]; then
             $GIT remote add upstream "git@github.com:$remote" &> /dev/null
             $GIT fetch --all &> /dev/null
         fi
-    fi
 fi

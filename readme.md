@@ -1,7 +1,7 @@
 # Gitapper
 
 Git is a difficult program to master because can do a lot of things and often everyone needs to adapt to their daily needs, with custom aliases and also scripts (for various needs).
-This tool create a wrapper to the `git` command that will let you to extend it with custom scripts ([to execute before and after the real git command](#hooks-script-avalaible)).
+This tool create a wrapper to the `git` command that will let you to extend it with custom scripts ([to execute before and after the real git command](#hooks-scripts-avalaible)).
 
 The tool is based on other projects, [the first inspiration for bash wrapper](https://gist.github.com/mmueller/7286919) and [GrumPHP for their tasks system](https://github.com/phpro/grumphp) or [hub](https://hub.github.com/) that extend `git` with a lot of stuff.
 
@@ -37,12 +37,8 @@ alias git=/your/path/where/you/downloaded/gitapper
 This bash script can run a specific script before and after the `git` command itself (or stop the execution of git itself).  
 In this repository you can find various hooks with different requirements and usage on various commands.
 
-Also let you to create custom parameters on git commands.
+### Hooks scripts avalaible
 
-### Hooks script avalaible
-
-* Pre-Clone
-  * If clone command has `--fork` parameter automatically will download from GitHub the original and your fork with a origin upstream configured
 * Post-Clone
   * Auto change directory inside the repo folder after the clone
 * Pre-Add
@@ -62,6 +58,15 @@ Also let you to create custom parameters on git commands.
   * If is used with interactive parameter will use the Forgit rebase with FZF
 * Pre-Reset
   * If no file is passed will use the Forgit reset with FZF
+
+### New commands avalaible
+
+* `git commit rename` it will use amend internally
+* `git commit remove [number]` it will remove the last commit based on that number
+* `git restage rename` it will update the index
+* `git rename-branch` it will use [this script](https://github.com/tj/git-extras/blob/master/bin/git-rename-branch)
+* `git squash [number]` it will merge all those commit based on that number from the latest
+* `git fork [repo]` it will download from GitHub the original and your fork with a origin upstream configured
 
 ## Autocomplete support
 
