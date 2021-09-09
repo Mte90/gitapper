@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Debug mode
-#set -x
+# set -x
 
 PARAMETERS=''
 for arg in "$@"
