@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Debug mode
-# set -x
+#set -x
 
 PARAMETERS=''
 for arg in "$@"
@@ -14,19 +14,22 @@ do
    PARAMETERS="$PARAMETERS $arg"
   fi
 done
+# Trim top/end trailing space
+PARAMETERS=$(echo $PARAMETERS | xargs)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
 GITAPPER_HOOKS="$DIR/hooks"
 GIT=$(which -a git | head -1)
 
 function exec_hook() {
+    command=($2)
     for EXT in "sh" "py"
     do        
-        if [[ -f "$GITAPPER_HOOKS/$1-$2.$EXT" ]]; then
+        if [[ -f "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" ]]; then
             if [[ $EXT == "sh" ]]; then
-                . "$GITAPPER_HOOKS/$1-$2.$EXT" "$GIT" "$2 $3"
+                . "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT" "$2 $3"
             else
-                "$GITAPPER_HOOKS/$1-$2.$EXT" "$GIT" "$2 $3"
+                "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT" "$2 $3"
             fi
         fi
     done
