@@ -7,6 +7,8 @@ The tool is based on other projects, [the first inspiration for bash wrapper](ht
 
 It integrates natively [Forgit](https://github.com/wfxr/forgit) for various commands in case no file or branch are defined.
 
+For a blogpost explaination check [here](https://daniele.tech/2021/09/gitapper-or-a-way-to-extend-git-without-alias-or-custom-scripts/).
+
 ## Requirements
 
 * git

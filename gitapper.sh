@@ -69,7 +69,8 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMET
     
     eval $GIT$PARAMETERS
 else
-    GIT_PARAMETERS=${PARAMETERS/" --fork"/''}
+    #GIT_PARAMETERS=${PARAMETERS/" --fork"/''}
+    GIT_PARAMETERS=$PARAMETERS
     exec_hook "pre" "$PARAMETERS"
     eval "$GIT $GIT_PARAMETERS"
     exec_hook "post" "$GIT_PARAMETERS"
