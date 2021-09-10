@@ -64,7 +64,7 @@ In this repository you can find various hooks with different requirements and us
 * `git commit rename` it will use amend internally
 * `git commit remove [number]` it will remove the last commit based on `[number]`
 * `git restage rename` it will update the index
-* `git rename-branch` it will use [this script](https://github.com/tj/git-extras/blob/master/bin/git-rename-branch)
+* `git rename-branch` it will use [this script](https://github.com/tj/git-extras/blob/master/bin/git-rename-branch) from Git-Extras [licensed as MIT](https://github.com/tj/git-extras/blob/master/LICENSE) using the `build.sh` script
 * `git squash [number]` it will merge all the commits based on that number starting from the latest
 * `git fork [repo]` it will download from GitHub the original repo and configure your fork origin as upstream
 
