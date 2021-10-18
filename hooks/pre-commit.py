@@ -6,7 +6,7 @@ import re, sys, os
 def main():
     pattern = r'(build|ci|docs|feat|fix|perf|refactor|style|test|revert)(\([\w\-]+\))?:\s.*'
     commit = sys.argv[2]
-    commit = commit[7:]
+    commit = commit[9:]
     if commit[0:2] == '-m':
         commit = commit[3:]
         m = re.match(pattern, commit)
