@@ -15,7 +15,7 @@ do
   fi
 done
 # Trim top/end trailing space
-PARAMETERS=$(echo $PARAMETERS | xargs)
+PARAMETERS=$(echo $PARAMETERS | sed -e 's/^[[:space:]]*//')
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
 GITAPPER_HOOKS="$DIR/hooks"
@@ -69,7 +69,6 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMET
     
     eval $GIT$PARAMETERS
 else
-    #GIT_PARAMETERS=${PARAMETERS/" --fork"/''}
     GIT_PARAMETERS=$PARAMETERS
     exec_hook "pre" "$PARAMETERS"
     eval "$GIT $GIT_PARAMETERS"
