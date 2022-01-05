@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Debug mode
-# set -x
+#set -x
 
 PARAMETERS=''
 for arg in "$@"
@@ -71,6 +71,8 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMET
 else
     GIT_PARAMETERS=$PARAMETERS
     exec_hook "pre" "$PARAMETERS"
-    eval "$GIT $GIT_PARAMETERS"
+    if [[ -d .git || "${PARAMETERS}" == *"init"* || "${PARAMETERS}" == *"clone"* ]]; then
+        eval "$GIT $GIT_PARAMETERS"
+    fi
     exec_hook "post" "$GIT_PARAMETERS"
 fi 
