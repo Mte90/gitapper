@@ -10,6 +10,7 @@ def main():
     commit = commit[7:]
     if commit[0:2] == '-m':
         commit = commit[3:]
+        commit = commit.replace('"', '')
         m = re.match(pattern, commit)
         if m is None:
             print("Conventional commit validation failed")
