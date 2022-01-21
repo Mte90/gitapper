@@ -3,10 +3,11 @@ import re, sys, os
 
 # Validate commits like https://www.conventionalcommits.org/en/v1.0.0/
 
+
 def main():
     pattern = r'(build|ci|docs|feat|fix|perf|refactor|style|test|revert)(\([\w\-]+\))?:\s.*'
     commit = sys.argv[2]
-    commit = commit[9:]
+    commit = commit[7:]
     if commit[0:2] == '-m':
         commit = commit[3:]
         m = re.match(pattern, commit)
@@ -17,5 +18,7 @@ def main():
             sys.exit(1)
         os.system(sys.argv[1] + ' commit -m "' + commit + '"')
         sys.exit(1)
+
+
 if __name__ == "__main__":
     main()
