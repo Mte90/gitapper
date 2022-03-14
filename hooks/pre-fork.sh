@@ -14,6 +14,7 @@ if [[ $url =~ $re ]]; then
         hostname=${BASH_REMATCH[3]}
         user=${BASH_REMATCH[4]}
         repo=${BASH_REMATCH[5]}
+        repo=${repo/\.git/}
 
         echo "$url download in progress"
         $GIT clone "git@github.com:$user/$repo.git" &> /dev/null
