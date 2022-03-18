@@ -72,6 +72,8 @@ else
     GIT_PARAMETERS=$PARAMETERS
     exec_hook "pre" "$PARAMETERS"
     if [[ -d .git || "${PARAMETERS}" == *"init"* || "${PARAMETERS}" == *"clone"* ]]; then
+        eval "$GIT $GIT_PARAMETERS"
+    else
         # Detect if git is there
         $(git rev-parse 2> /dev/null)
 
