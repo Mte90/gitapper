@@ -32,6 +32,7 @@ alias git=/your/path/where/you/downloaded/gitapper
 
 ```
 --nw    (As last command) Disable gitapper and pass all the parameters to the real git
+--n    (As last command) Disable gitapper and pass -n parameter to the real git (integration with GrumPHP)
 ```
 
 ## Hooks

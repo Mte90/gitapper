@@ -47,13 +47,13 @@ if [ "$GIT" = "" ]; then
 fi
 
 # General: Do not run hooks for --help or nw
-if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMETERS}" == *"gitapper"* ]]; then
+if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMETERS}" == *"-n"* || "${PARAMETERS}" == *"gitapper"* ]]; then
     ARGS=''
     ARG=''
     # Remove --nw parameter and pass to git
     for i in "$@"
     do
-        if [[ $i =~ "[[:space:]]" || $i != *"--nw"* ]]
+        if [[ $i =~ "[[:space:]]" || $i != *"--nw"* || $i != *"-n"* ]]
         then
             i2=\"$i\"
             ARG=$i
@@ -63,10 +63,13 @@ if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMET
             fi
             ARGS="$ARGS $ARG"
             i=$i2
+        elif [[== *"-n"* ]]
+        then
+            ARGS="$ARGS -n"
         fi
     done
     PARAMETERS=$ARGS
-    
+
     eval $GIT$PARAMETERS
 else
     GIT_PARAMETERS=$PARAMETERS
