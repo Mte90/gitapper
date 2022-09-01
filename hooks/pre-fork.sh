@@ -24,5 +24,6 @@ if [[ $url =~ $re ]]; then
             echo "$remote download in progress"
             $GIT remote add upstream "git@github.com:$remote" &> /dev/null
             $GIT fetch --all &> /dev/null
+            exit 1
         fi
 fi
