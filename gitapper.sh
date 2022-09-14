@@ -21,6 +21,11 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 GITAPPER_HOOKS="$DIR/hooks"
 GIT=$(which -a git | head -1)
 
+if [[ "${PARAMETERS}" == "rev-parse --abbrev-ref HEAD" ]]; then
+    eval $GIT $PARAMETERS 2> /dev/null
+    exit 1
+fi
+
 source $DIR/lib/forgit.sh
 
 function exec_hook() {
@@ -47,7 +52,11 @@ if [ "$GIT" = "" ]; then
 fi
 
 # General: Do not run hooks for --help or nw
-if [[ "${PARAMETERS}" == *"--help"* || "${PARAMETERS}" == *"--nw"* || "${PARAMETERS}" == *"-n"* || "${PARAMETERS}" == *"gitapper"* ]]; then
+if [[ "${PARAMETERS}" == *"--help"* ||
+      "${PARAMETERS}" == *"--nw"* ||
+      "${PARAMETERS}" == *"-n"* ||
+      "${PARAMETERS}" == *"gitapper"*
+   ]]; then
     ARGS=''
     ARG=''
     # Remove --nw parameter and pass to git
