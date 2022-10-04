@@ -1,14 +1,14 @@
 # Auto cd after cloning
-# set -- $*
+set -- $*
 
-# basename=$(basename $3)
-# folder=${basename%.*}
-# cwd=$(pwd)
+basename=$(basename $3)
+folder=${basename%.*}
+cwd=$(pwd)
 
-# if [[ -d "$cwd/$folder" ]]; then
-#     cd "$cwd/$folder"
-#     $SHELL
-# fi
+if [[ -d "$cwd/$folder" ]]; then
+    cd "$cwd/$folder"
+    $SHELL
+fi
 
 # Install dependencies if they exist, first checks if software is installed
 # npm, package.json
