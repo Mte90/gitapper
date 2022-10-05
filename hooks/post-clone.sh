@@ -13,7 +13,7 @@ fi
 # Install dependencies if they exist, first checks if software is installed
 # npm, package.json
 if [[ -f "package.json" ]]; then
-  if which node &> /dev/null
+  if which npm &> /dev/null
     then
         npm install
     else
@@ -35,7 +35,7 @@ fi
 if [[ -f "composer.json" ]]; then
   if which composer &> /dev/null
     then
-        composer.phar install
+        composer install
     else
         echo "[REQUIREMENT] composer not installed. Can't install composer dependencies"
     fi
