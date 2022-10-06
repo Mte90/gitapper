@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
+
 # FZF picker to reset interactive
 
 # Requirements
 #  - fzf
-set -- $*
+set -- "$*"
 
 if [[ $3 == "" ]]; then
     forgit::reset::head

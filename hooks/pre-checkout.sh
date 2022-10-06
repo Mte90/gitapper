@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
+
 # Download a GitHub pull request and create a new branch with that
 
 # Requirements
 #  - jq
-set -- $*
+set -- "$*"
 
 repo=$3
 if [[ $repo == *"https://github.com/"* ]]; then
@@ -11,13 +13,13 @@ if [[ $repo == *"https://github.com/"* ]]; then
     id="${repo_full/$repo/}"
     id="${id/\/pull\//}"
 
-    payload=$(curl -s https://api.github.com/repos/$repo/pulls/$id || exit 1)
+    payload=$(curl -s https://api.github.com/repos/"$repo"/pulls/"$id" || exit 1)
     to_branch=$(/bin/echo "$payload" | jq -r '.head.ref')
 
     echo " - Download pull request $id from $repo"
 
-    $1 fetch origin pull/$id/head:$to_branch
-    $1 checkout $to_branch
+    $1 fetch origin pull/"$id"/head:"$to_branch"
+    $1 checkout "$to_branch"
     exit 1
 fi
 
@@ -25,7 +27,7 @@ fi
 
 # Requirements
 #  - fzf
-set -- $*
+set -- "$*"
 
 parameter=$3
 if [[ $parameter == "" ]]; then
