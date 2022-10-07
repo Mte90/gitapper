@@ -10,7 +10,7 @@ It integrates natively [Forgit](https://github.com/wfxr/forgit) for various comm
 For a blogpost explaination check [here](https://daniele.tech/2021/09/gitapper-or-a-way-to-extend-git-without-alias-or-custom-scripts/).
 
 ## Showcase
-![](https://github.com/Mte90/gitapper/showcase_gitapper.gif)
+![Gif](https://github.com/Stronkness/gitapper/blob/showcase/showcase_gitapper.gif)
 
 ## Requirements
 
