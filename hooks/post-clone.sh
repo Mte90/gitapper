@@ -11,17 +11,17 @@ if [[ -d "$cwd/$folder" ]]; then
 fi
 
 # Install dependencies if they exist, first checks if software is installed
-# npm, package.json
+# npm package.json
 if [[ -f "package.json" ]]; then
   if which npm &> /dev/null
     then
         npm install
     else
-        echo "[REQUIREMENT] Node not installed. Can't install Node dependencies"
+        echo "[REQUIREMENT] NPM not installed. Can't install Node dependencies"
     fi
 fi
 
-# pip, requirements.txt
+# pip requirements.txt
 if [[ -f "requirements.txt" ]]; then
   if which pip &> /dev/null
     then
@@ -31,7 +31,7 @@ if [[ -f "requirements.txt" ]]; then
     fi
 fi
 
-# composer, composer.json
+# composer composer.json
 if [[ -f "composer.json" ]]; then
   if which composer &> /dev/null
     then

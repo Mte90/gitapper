@@ -47,7 +47,7 @@ In this repository you can find various hooks with different requirements and us
 
 * Post-Clone
   * Auto-change directory inside the repo directory after cloning
-  * Execute pip, npm or composer if the porject use it
+  * Execute pip, npm or composer if the project use it
 * Pre-Add
   * If no file passed, it will use the Forgit add with FZF
 * Pre-Checkout
