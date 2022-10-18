@@ -26,8 +26,6 @@ if [[ "${PARAMETERS}" == "rev-parse --abbrev-ref HEAD" ]]; then
     exit 1
 fi
 
-source "$DIR"/lib/forgit.sh
-
 function exec_hook() {
     command=("$2")
     for EXT in "sh" "py"
