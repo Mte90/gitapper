@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 # FZF picker to clean interactive
 # Requirements
 #  - fzf
-set -- $*
+set -- "$*"
 if [[ $3 == "" ]]; then
     forgit::clean
     exit 1

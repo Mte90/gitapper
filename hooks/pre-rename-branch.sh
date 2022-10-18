@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 # New command to rename a branch
 
-set -- $*
+set -- "$*"
 
 
-$DIR/lib/rename-branch.sh $3 $4
+"$DIR"/lib/rename-branch.sh "$3" "$4"
 exit 1

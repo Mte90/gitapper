@@ -82,3 +82,8 @@ You can use [complete-alias](https://github.com/cykerway/complete-alias), that i
 ### Why is it different from an alias?
 
 An alias is another command to remember, it is an external command, it does not extend another one.
+
+
+### Verifying code style
+
+This project is built with bash and Python for Linux. In order to fully approve this code's syntax use [shellcheck](https://github.com/koalaman/shellcheck) and [pylint](https://pypi.org/project/pylint/).

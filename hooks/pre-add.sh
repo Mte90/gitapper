@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
+
 # FZF picker to add in case no file is passed
 
 # Requirements
 #  - fzf
-set -- $*
+set -- "$*"
 
 parameter=$3
 if [[ $parameter == "" ]]; then

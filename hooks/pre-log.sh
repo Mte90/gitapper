@@ -1,8 +1,10 @@
+#!/usr/bin/env bash
+
 # FZF picker to log interactive of a file
 
 # Requirements
 #  - fzf
-set -- $*
+set -- "$*"
 if [[ $3 != "" ]]; then
     forgit::log
     exit 1

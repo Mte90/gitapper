@@ -1,6 +1,8 @@
+#!/usr/bin/env bash
+
 # Rename parameter is more easy then --amend
 
-set -- $*
+set -- "$*"
 
 if [[ $3 == "rename" ]]; then
     git commit --amend
