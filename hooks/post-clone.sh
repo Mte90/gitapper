@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Auto cd after cloning
 set -- "$*"
 
-basename=$(basename "$3")
+parameters=($1)
+basename=$(basename "${parameters[2]}")
 folder=${basename%.*}
 cwd=$(pwd)
 

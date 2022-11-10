@@ -5,8 +5,9 @@
 # Requirements
 #  - jq
 set -- "$*"
+parameters=($1)
 
-repo=$3
+repo=${parameters[2]}
 if [[ $repo == *"https://github.com/"* ]]; then
     repo_full="${repo#https\:\/\/github\.com\/}"
     repo="${repo_full%\/pull\/[[:digit:]]*}"
@@ -29,7 +30,7 @@ fi
 #  - fzf
 set -- "$*"
 
-parameter=$3
+parameter=${parameters[2]}
 if [[ $parameter == "" ]]; then
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     source "$DIR"/../lib/forgit.sh

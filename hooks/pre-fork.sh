@@ -6,8 +6,9 @@
 #  - jq
 #  - awk
 set -- $*
+parameters=($1)
 
-url=$3
+url=${parameters[2]}
 url=${url%/}
 re="^(https|git)(:\/\/|@)([^\/:]+)[\/:]([^\/:]+)\/(.+)$"
 if [[ $url =~ $re ]]; then
@@ -24,7 +25,7 @@ if [[ $url =~ $re ]]; then
             $GIT remote add upstream "git@github.com:$remote" &> /dev/null
             $GIT fetch --all &> /dev/null
         fi
-        $(dirname "$0")/hooks/post-clone.sh $1 $2 $3
+        $(dirname "$0")/hooks/post-clone.sh ${parameters[0]} ${parameters[1]} ${parameters[2]}
         $SHELL
         exit 1
 fi

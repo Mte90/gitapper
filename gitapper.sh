@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 # Debug mode
-#[[ -v debug ]] && set -x
+# set -x
 
 PARAMETERS=''
 for arg in "$@"
@@ -27,12 +27,12 @@ if [[ "${PARAMETERS}" == "rev-parse --abbrev-ref HEAD" ]]; then
 fi
 
 function exec_hook() {
-    command=("$2")
+    command=($2)
     for EXT in "sh" "py"
     do
         if [[ -f "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" ]]; then
             if [[ $EXT == "sh" ]]; then
-                "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT" "$2 $3"
+                "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT $2 $3"
             else
                 "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT" "$2 $3"
             fi

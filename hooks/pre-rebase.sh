@@ -5,8 +5,9 @@
 # Requirements
 #  - fzf
 set -- "$*"
+parameters=($1)
 
-if [[ $3 == "-i" && $4 == "" ]]; then
+if [[ ${parameters[2]} == "-i" && ${parameters[3]} == "" ]]; then
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     source "$DIR"/../lib/forgit.sh
     forgit::rebase

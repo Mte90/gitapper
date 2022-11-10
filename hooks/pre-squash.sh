@@ -3,10 +3,11 @@
 # New command to rename a branch
 
 set -- "$*"
+parameters=($1)
 
-if [[ $3 == "" ]]; then
+if [[ ${parameters[2]} == "" ]]; then
     echo "This command require a number of commits to squash from the latest"
     exit 1
 fi
-git reset --soft HEAD~"$3" && git commit;
+git reset --soft HEAD~"${parameters[2]}" && git commit;
 exit 1

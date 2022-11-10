@@ -3,13 +3,14 @@
 # Rename parameter is more easy then --amend
 
 set -- "$*"
+parameters=($1)
 
-if [[ $3 == "rename" ]]; then
+if [[ ${parameters[2]} == "rename" ]]; then
     git commit --amend
     exit 1
 fi
 
-if [[ $3 == "remove" ]]; then
-    git reset --soft HEAD~"$4"
+if [[ ${parameters[2]} == "remove" ]]; then
+    git reset --soft HEAD~"${parameters[3]}"
     exit 1
 fi
