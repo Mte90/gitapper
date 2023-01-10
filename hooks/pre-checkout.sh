@@ -33,7 +33,6 @@ set -- "$*"
 parameter=${parameters[2]}
 if [[ $parameter == "" ]]; then
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-    source "$DIR"/../lib/forgit.sh
-    forgit::checkout::branch
+    "$DIR"/../lib/forgit.sh checkout-branch selector
     exit 1
 fi
