@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir ./lib
+mkdir -p ./lib
 
 echo "Downloading Forgit"
 wget https://raw.githubusercontent.com/wfxr/forgit/master/bin/git-forgit -O ./lib/forgit.sh
