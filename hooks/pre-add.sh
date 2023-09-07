@@ -6,7 +6,7 @@
 #  - fzf
 set -- "$*"
 
-if [[ $2 == "" ]]; then
+if [[ $1 == "" ]]; then
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     "$DIR"/../lib/forgit.sh add
     exit 1
