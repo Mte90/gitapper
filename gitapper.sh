@@ -77,7 +77,7 @@ if [[ "${PARAMETERS}" == *"--help"* ||
     done
     PARAMETERS=$ARGS
 
-    eval "$GIT""$PARAMETERS"
+    eval "$GIT" "$PARAMETERS"
 else
     GIT_PARAMETERS=$PARAMETERS
     exec_hook "pre" "$PARAMETERS"
@@ -88,7 +88,7 @@ else
         git rev-parse 2> /dev/null
 
         if [[ "$?" -ne "128" ]]; then
-            eval "$GIT $GIT_PARAMETERS"
+            "$GIT $GIT_PARAMETERS"
         fi
     fi
     exec_hook "post" "$GIT_PARAMETERS"
