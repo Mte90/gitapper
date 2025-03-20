@@ -18,6 +18,7 @@ For a blogpost explaination check [here](https://daniele.tech/2021/09/gitapper-o
 * bash
 * wget
 * [fzf](https://github.com/junegunn/fzf)
+* python-dbus (for `pre-commit.py`)
 
 ### Installation
 
@@ -57,6 +58,7 @@ In this repository you can find various hooks with different requirements and us
   * If no file is passed, it will use the Forgit clean with FZF
 * Pre-Commit
   * Validate the commit if the `-m` parameter is defined following [ConventionalCommits](https://www.conventionalcommits.org/en/v1.0.0)
+  * Add the music played from VLC, inspired from [https://github.com/mroth/git-muzak](https://github.com/mroth/git-muzak)
 * Pre-Diff
   * If no file is passed, it will use the Forgit diff with FZF
 * Pre-Log

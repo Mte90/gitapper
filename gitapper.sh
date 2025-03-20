@@ -88,7 +88,7 @@ else
         git rev-parse 2> /dev/null
 
         if [[ "$?" -ne "128" ]]; then
-            "$GIT $GIT_PARAMETERS"
+            eval "$GIT $GIT_PARAMETERS"
         fi
     fi
     exec_hook "post" "$GIT_PARAMETERS"
