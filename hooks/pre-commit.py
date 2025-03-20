@@ -1,6 +1,6 @@
-#!/usr/bin/env python
-import re, sys, os
+#!/usr/bin/env python3
 import dbus
+import re, sys, os
 
 # Validate commits like https://www.conventionalcommits.org/en/v1.0.0/
 
