@@ -34,6 +34,10 @@ function exec_hook() {
             if [[ $EXT == "sh" ]]; then
                 "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT $2 $3"
             else
+                # To avoid venv issues with python
+                if command -v deactivate >/dev/null 2>&1; then
+                    deactivate
+                fi
                 "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" "$GIT" "$2 $3"
             fi
         fi
