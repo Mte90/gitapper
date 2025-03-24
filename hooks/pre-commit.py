@@ -1,23 +1,51 @@
 #!/usr/bin/env python3
-import dbus
+import subprocess
 import re, sys, os
 
 # Validate commits like https://www.conventionalcommits.org/en/v1.0.0/
 
+import subprocess
+
 def get_vlc_track_info():
-    session_bus = dbus.SessionBus()
+    try:
+        result = subprocess.run(
+            [
+                "dbus-send", "--print-reply", "--dest=org.mpris.MediaPlayer2.vlc",
+                "/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties.Get",
+                "string:org.mpris.MediaPlayer2.Player", "string:Metadata"
+            ],
+            capture_output=True,
+            text=True,
+            check=True
+        )
 
-    vlc_media_player = session_bus.get_object('org.mpris.MediaPlayer2.vlc', '/org/mpris/MediaPlayer2')
-    vlc_interface = dbus.Interface(vlc_media_player, 'org.freedesktop.DBus.Properties')
+        lines = result.stdout.split('\n')
 
-    metadata = vlc_interface.Get('org.mpris.MediaPlayer2.Player', 'Metadata')
+        if any("xesam:video" in line for line in lines):
+            return ""
 
-    if 'xesam:audio' in metadata and metadata['xesam:audio']:
-        title = metadata.get('xesam:title', 'No Title')
-        artist = metadata.get('xesam:artist', ['No author'])[0]
-        return title, artist
-    else:
-        return None, None
+        title = "Unknown Title"
+        artist = "Unknown Artist"
+
+        it = iter(lines)
+        for line in it:
+            if "xesam:title" in line:
+                try:
+                    title = next(it).strip().split('"')[1]
+                except StopIteration:
+                    pass
+            elif "xesam:artist" in line:
+                try:
+                    next(it)
+                    artist_line = next(it).strip()
+                    artist = artist_line.split('string "')[-1].split('"')[0]
+                except StopIteration:
+                    pass
+
+        return f"\n♬ {artist} - {title}"
+
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e}"
 
 def main():
     pattern = r'(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(\([\w\-]+\))?:\s.*'
@@ -32,9 +60,9 @@ def main():
             print("  Commit types: fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert")
             print("Example: feat(parser): add ability to parse arrays.")
             sys.exit(1)
-        title, artist = get_vlc_track_info()
-        if title != None:
-            commit += f"\n √ ♬ {artist} - {title}"
+        song = get_vlc_track_info()
+        if song != None:
+            commit += song
         os.system(sys.argv[1] + ' commit -m "' + commit + '"')
         sys.exit(1)
 

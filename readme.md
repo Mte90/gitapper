@@ -18,7 +18,6 @@ For a blogpost explaination check [here](https://daniele.tech/2021/09/gitapper-o
 * bash
 * wget
 * [fzf](https://github.com/junegunn/fzf)
-* python3-dbus (for `pre-commit.py`)
 
 ### Installation
 
