@@ -7,6 +7,18 @@ import re, sys, os
 import subprocess
 
 def get_vlc_track_info():
+    bash_command = """
+        url=$(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//" | sed "s/git@gitlab.com:/https:\/\/gitlab.com\//" | sed "s/\.git$//");
+        if [ -z "$url" ]; then
+            echo "1";
+        else
+            curl -s -o /dev/null -w "%{http_code}" "$url" | grep -q 404 && echo "1" || echo "0";
+        fi
+    """
+    result = subprocess.run(bash_command, shell=True, text=True, capture_output=True)
+    if result != "0":
+        return None
+
     try:
         result = subprocess.run(
             [
@@ -46,6 +58,8 @@ def get_vlc_track_info():
 
     except subprocess.CalledProcessError as e:
         return f"Error: {e}"
+
+    return None
 
 def main():
     pattern = r'(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(\([\w\-]+\))?:\s.*'
