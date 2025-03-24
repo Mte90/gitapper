@@ -8,7 +8,7 @@ import subprocess
 
 def get_vlc_track_info():
     bash_command = """
-        url=$(git remote get-url origin | sed "s/git@github.com:/https://github.com\//" | sed "s/git@gitlab.com:/https://gitlab.com\//" | sed "s/\.git$//");
+        url=$(git remote get-url origin | sed "s/git@github.com:/https://github.com/" | sed "s/git@gitlab.com:/https://gitlab.com/" | sed "s/\.git$//");
         if [ -z "$url" ]; then
             echo "1";
         else
