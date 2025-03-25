@@ -1,22 +1,32 @@
 #!/usr/bin/env python3
 import subprocess
 import re, sys, os
+import requests
+from urllib.parse import urlparse, urlunparse, quote
 
 # Validate commits like https://www.conventionalcommits.org/en/v1.0.0/
 
-import subprocess
+def check_url_status(url):
+    parsed_url = urlparse(url)
+    url = urlunparse(
+        (parsed_url.scheme, parsed_url.netloc, quote(parsed_url.path),
+         parsed_url.params, parsed_url.query, parsed_url.fragment)
+    )
+    try:
+        response = requests.get(url)
+
+        if response.status_code == 404:
+            return False
+        else:
+            return True
+    except requests.exceptions.RequestException as e:
+        return False
 
 def get_vlc_track_info():
-    bash_command = """
-        url=$(git remote get-url origin | sed "s/git@github.com:/https://github.com/" | sed "s/git@gitlab.com:/https://gitlab.com/" | sed "s/.git$//");
-        if [ -z "$url" ]; then
-            echo "1";
-        else
-            curl -s -o /dev/null -w "%{http_code}" "$url" | grep -q 404 && echo "1" || echo "0";
-        fi
-    """
-    result = subprocess.run(bash_command, shell=True, text=True, capture_output=True)
-    if result != "0":
+    result = subprocess.run("git remote get-url origin", shell=True, text=True, capture_output=True)
+    url = result.stdout.replace(".git","").replace(":","/").replace("git@", "https://").replace('%0A',"")
+
+    if check_url_status(url) is False:
         return None
 
     try:
