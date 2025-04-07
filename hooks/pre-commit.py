@@ -15,7 +15,7 @@ def check_url_status(url):
     try:
         response = requests.get(url)
 
-        if response.status_code == 404:
+        if response.status_code == 404 or response.status_code == 403:
             return False
         else:
             return True
