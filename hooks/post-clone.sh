@@ -27,6 +27,7 @@ fi
 if [[ -f "requirements.txt" ]]; then
   if which pip &> /dev/null
     then
+        python -m venv .venv
         pip install -r requirements.txt
     else
         echo "[REQUIREMENT] pip not installed. Can't install python dependencies"
