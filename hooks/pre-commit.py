@@ -48,6 +48,8 @@ def get_vlc_track_info():
 
         title = "Unknown Title"
         artist = "Unknown Artist"
+        if artist == "Unknown Artist":
+            return ""
 
         it = iter(lines)
         for line in it:
