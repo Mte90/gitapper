@@ -15,19 +15,22 @@ do
   fi
 done
 # Trim top/end trailing space
-PARAMETERS=$(echo "$PARAMETERS" | sed -e 's/^[[:space:]]*//')
+PARAMETERS=${PARAMETERS#"${PARAMETERS%%[![:space:]]*}"}
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Looks inside this folder for scripts to include as wrapper for the various commands
 GITAPPER_HOOKS="$DIR/hooks"
 GIT=$(which -a git | head -1)
 
 if [[ "${PARAMETERS}" == "rev-parse --abbrev-ref HEAD" ]]; then
+# shellcheck disable=SC2016
+# shellcheck disable=SC2138
+# Intentional eval: parameters contain valid git subcommand and args to execute
     eval "$GIT" "$PARAMETERS" 2> /dev/null
     exit 1
 fi
 
 function exec_hook() {
-    command=($2)
+    read -ra command <<< "$2"
     for EXT in "sh" "py"
     do
         if [[ -f "$GITAPPER_HOOKS/$1-${command[0]}.$EXT" ]]; then
@@ -81,17 +84,26 @@ if [[ "${PARAMETERS}" == *"--help"* ||
     done
     PARAMETERS=$ARGS
 
+# shellcheck disable=SC2016
+# shellcheck disable=SC2138
+# Intentional eval: parameters contain valid git subcommand and args to execute
     eval "$GIT" "$PARAMETERS"
 else
     GIT_PARAMETERS=$PARAMETERS
     exec_hook "pre" "$PARAMETERS"
     if [[ -d .git || "${PARAMETERS}" == *"init"* || "${PARAMETERS}" == *"clone"* ]]; then
+# shellcheck disable=SC2016
+# shellcheck disable=SC2138
+# Intentional eval: git parameters contain valid subcommand and args to execute
         eval "$GIT $GIT_PARAMETERS"
     else
         # Detect if git is there
         git rev-parse 2> /dev/null
 
         if [[ "$?" -ne "128" ]]; then
+# shellcheck disable=SC2016
+# shellcheck disable=SC2138
+# Intentional eval: git parameters contain valid subcommand and args to execute
             eval "$GIT $GIT_PARAMETERS"
         fi
     fi

@@ -1,0 +1,14 @@
+# ShellCheck configuration for Gitapper project
+# Reference: https://github.com/koalaman/shellcheck/wiki/SC2016
+
+# Shell type
+shell=bash
+
+# Exclude files (glob patterns)
+exclude=lib/forgit.sh
+
+# Enable additional warnings for safety
+enable=tradition-escape,missing-var-strict
+
+# Disable rules that don't apply to this project
+disable=SC2034,SC2154

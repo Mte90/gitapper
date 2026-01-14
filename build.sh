@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Safety: strict error handling
+set -euo pipefail
+
 mkdir -p ./lib
 
 echo "Downloading Forgit"

@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
+#
+# Safety: strict error handling
+set -euo pipefail
 
 set -- "$*"
+read -ra parameters <<< "$1"
 
-parameters=($1)
-basename=$(basename "${parameters[2]}")
-folder=${basename%.*}
-cwd=$(pwd)
+# Check if we have at least 3 parameters (script, command, repo_url)
+if [[ ${#parameters[@]} -ge 3 ]]; then
+    basename=$(basename "${parameters[2]}")
+    folder=${basename%.*}
+    cwd=$(pwd)
 
-if [[ -d "$cwd/$folder" ]]; then
-    cd "$cwd/$folder" || exit
-    $SHELL
+    if [[ -d "$cwd/$folder" ]]; then
+        cd "$cwd/$folder" || exit
+        $SHELL
+    fi
 fi
 
 # Install dependencies if they exist, first checks if software is installed

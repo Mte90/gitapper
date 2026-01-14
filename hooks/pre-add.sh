@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Safety: strict error handling
+set -euo pipefail
+
 # FZF picker to add in case no file is passed
 
 # Requirements

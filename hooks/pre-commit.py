@@ -69,7 +69,8 @@ def get_vlc_track_info():
         return f"\n♬ {artist} - {title}"
 
     except subprocess.CalledProcessError as e:
-        return f"Error: {e}"
+        print(f"Error: {e}")
+        return ""
 
     return None
 
