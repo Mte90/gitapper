@@ -45,8 +45,8 @@ fi
 set -- "$*"
 read -ra parameters <<< "$1"
 
-# Check if we have at least 3 parameters (script, command, args)
-if [[ ${#parameters[@]} -ge 3 ]] && [[ "${parameters[2]}" == "" ]]; then
+# Check if no branch specified (parameters: script, git command)
+if [[ ${#parameters[@]} -lt 2 || (${#parameters[@]} -ge 2 && "${parameters[1]}" == "checkout" && "${parameters[2]:-}" == "") ]]; then
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     "$DIR"/../lib/forgit.sh checkout_branch
     exit 1
