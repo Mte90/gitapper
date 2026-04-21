@@ -18,6 +18,19 @@ For a blogpost explaination check [here](https://daniele.tech/2021/09/gitapper-o
 * bash
 * wget
 * [fzf](https://github.com/junegunn/fzf)
+* Python with `requests` library (for AI commit generation)
+
+### AI Commit Generation (Optional)
+
+To enable AI-generated commit messages when running `git commit` without `-m`:
+
+```bash
+export GITAPPER_AI_HOST="https://api.openai.com/v1"
+export GITAPPER_AI_KEY="your-api-key"
+export GITAPPER_AI_MODEL="gpt-3.5-turbo"
+```
+
+For compatible APIs (OpenAI, Ollama, LM Studio, etc.), set the host accordingly.
 
 ### Installation
 
@@ -57,6 +70,7 @@ In this repository you can find various hooks with different requirements and us
   * If no file is passed, it will use the Forgit clean with FZF
 * Pre-Commit
   * Validate the commit if the `-m` parameter is defined following [ConventionalCommits](https://www.conventionalcommits.org/en/v1.0.0)
+  * If no `-m` parameter is passed, generate a commit message using AI (requires environment variables configuration)
   * Add the music played from VLC, inspired from [https://github.com/mroth/git-muzak](https://github.com/mroth/git-muzak)
 * Pre-Diff
   * If no file is passed, it will use the Forgit diff with FZF
