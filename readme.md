@@ -80,6 +80,8 @@ In this repository you can find various hooks with different requirements and us
   * If used with interactive parameter, it will use the Forgit rebase with FZF
 * Pre-Reset
   * If no file is passed, it will use the Forgit reset with FZF
+* Pre-Ignore
+  * Adds files or folders to .gitignore with automatic detection (directories get trailing slash)
 
 ### New commands avalaible
 
@@ -90,6 +92,7 @@ In this repository you can find various hooks with different requirements and us
 * `git cmerge [number]` it will merge all the commits based on that number and open the editor with the oldest commit message for editing
 * `git squash [number]` it will merge all the commits based on that number starting from the latest
 * `git fork [repo]` it will download from GitHub the original repo and configure your fork origin as upstream
+* `git ignore [file/folder]` file type autodetection to add stuff to exclude on .gitignore
 
 ## Autocomplete support
 
