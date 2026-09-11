@@ -36,14 +36,32 @@ def get_vlc_track_info():
     try:
         result = subprocess.run(
             [
-                "dbus-send", "--print-reply", "--dest=org.mpris.MediaPlayer2.vlc",
+                "dbus-send", "--print-reply", "--dest=org.freedesktop.DBus",
+                "/org/freedesktop/DBus", "org.freedesktop.DBus.ListNames"
+            ],
+            capture_output=True,
+            text=True
+        )
+        if result.returncode != 0:
+            return None
+
+        players = [line.split('"')[1] for line in result.stdout.splitlines()
+                   if "org.mpris.MediaPlayer2." in line]
+        players.sort(key=lambda name: 0 if name.endswith("vlc") else 1)
+        if not players:
+            return None
+
+        result = subprocess.run(
+            [
+                "dbus-send", "--print-reply", "--dest=" + players[0],
                 "/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties.Get",
                 "string:org.mpris.MediaPlayer2.Player", "string:Metadata"
             ],
             capture_output=True,
-            text=True,
-            check=True
+            text=True
         )
+        if result.returncode != 0:
+            return None
 
         lines = result.stdout.split('\n')
 
@@ -52,8 +70,6 @@ def get_vlc_track_info():
 
         title = "Unknown Title"
         artist = "Unknown Artist"
-        if artist == "Unknown Artist":
-            return ""
 
         it = iter(lines)
         for line in it:
@@ -70,13 +86,13 @@ def get_vlc_track_info():
                 except StopIteration:
                     pass
 
+        if artist == "Unknown Artist":
+            return ""
+
         return f"\n♬ {artist} - {title}"
 
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
-        return ""
-
-    return None
+    except OSError:
+        return None
 
 
 def get_ai_commit_message(diff_content):
